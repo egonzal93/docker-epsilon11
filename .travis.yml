@@ -7,3 +7,17 @@ before_install:
 
 script:
   - docker run -t egonzal93/docker-epsilon11 npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstack
+  #AMAZON AWS url http://dockerepsilon11-env.t9q8r2hrir.us-east-2.elasticbeanstalk.com/
+  region: "us-east-2"
+  app: "docker-epsilon11"
+  env: "DockerEpsilon11-env"
+  bucket_name: "elasticbeanstalk-us-east-2-837134779439"
+  bucket_path: "docker-epsilon11"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
